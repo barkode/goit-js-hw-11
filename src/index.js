@@ -62,18 +62,18 @@ function onLoadMoreBtn() {
       renderGallery(data.hits);
       simpleLightBox = new SimpleLightbox('.gallery a').refresh();
 
-      // const totalPages = Math.ceil(data.totalHits / perPage);
+      const totalPages = Math.ceil(data.totalHits / perPage);
 
-      // if (page >= totalPages) {
-      //   loadMoreBtn.classList.add('is-hidden');
-      //   alertEndOfSearch();
-      // }
+      if (page >= totalPages) {
+        //   loadMoreBtn.classList.add('is-hidden');
+        alertEndOfSearch();
+        observer.unobserve(sentinel);
+      }
     })
     .catch(error => console.log(error));
 }
 
 function alertImagesFound(data) {
-  console.log(data);
   Notiflix.Notify.success(`Hooray! We found ${data.total} images.`);
 }
 

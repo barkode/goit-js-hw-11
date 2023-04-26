@@ -22,21 +22,3 @@ function onToTopBtn() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
-
-// const options = {
-//   rootMargin: '300px',
-// };
-
-// const onEntry = entries => {
-//   const search = searchForm.elements.searchQuery.value.trim();
-//   entries.forEach(entry => {
-//     if (entry.isIntersecting && search !== '') {
-//       console.log('Need to download');
-//       onLoadMoreClick();
-//     }
-//   });
-// };
-
-// const observer = new IntersectionObserver(onEntry, options);
-
-// observer.observe(sentinel);
