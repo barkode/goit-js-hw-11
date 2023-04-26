@@ -198,20 +198,20 @@ function alertEndOfSearch() {
 
 // Infinity scroll
 
-const options = {
-  rootMargin: '300px',
-};
+// const options = {
+//   rootMargin: '300px',
+// };
 
-const onEntry = entries => {
-  const search = searchForm.elements.searchQuery.value.trim();
-  entries.forEach(entry => {
-    if (entry.isIntersecting && search !== '') {
-      console.log('Need to download');
-      onLoadMoreBtn();
-    }
-  });
-};
+// const onEntry = entries => {
+//   const search = searchForm.elements.searchQuery.value.trim();
+//   entries.forEach(entry => {
+//     if (entry.isIntersecting && search !== '') {
+//       console.log('Need to download');
+//       onLoadMoreBtn();
+//     }
+//   });
+// };
 
-const observer = new IntersectionObserver(onEntry, options);
+// const observer = new IntersectionObserver(onEntry, options);
 
-observer.observe(sentinel);
+// observer.observe(sentinel);
