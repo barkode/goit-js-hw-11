@@ -15,7 +15,7 @@ let simpleLightBox;
 const perPage = 40;
 
 searchForm.addEventListener('submit', onSearchForm);
-loadMoreBtn.addEventListener('click', onLoadMoreBtn);
+// loadMoreBtn.addEventListener('click', onLoadMoreBtn);
 
 onScroll();
 onToTopBtn();
@@ -42,9 +42,9 @@ function onSearchForm(e) {
         simpleLightBox = new SimpleLightbox('.gallery a').refresh();
         alertImagesFound(data);
 
-        if (data.totalHits > perPage) {
-          loadMoreBtn.classList.remove('is-hidden');
-        }
+        // if (data.totalHits > perPage) {
+        //   loadMoreBtn.classList.remove('is-hidden');
+        // }
       }
     })
     .catch(error => console.log(error))
@@ -60,16 +60,14 @@ function onLoadMoreBtn() {
   getImages(query, page, perPage)
     .then(({ data }) => {
       renderGallery(data.hits);
-      console.log(data.hits);
-      console.log(data.totalHits);
       simpleLightBox = new SimpleLightbox('.gallery a').refresh();
 
-      const totalPages = Math.ceil(data.totalHits / perPage);
+      // const totalPages = Math.ceil(data.totalHits / perPage);
 
-      if (page >= totalPages) {
-        loadMoreBtn.classList.add('is-hidden');
-        alertEndOfSearch();
-      }
+      // if (page >= totalPages) {
+      //   loadMoreBtn.classList.add('is-hidden');
+      //   alertEndOfSearch();
+      // }
     })
     .catch(error => console.log(error));
 }
@@ -98,20 +96,18 @@ function alertEndOfSearch() {
 
 // Infinity scroll
 
-// const options = {
-//   rootMargin: '300px',
-// };
+const options = {
+  rootMargin: '300px',
+};
 
-// const onEntry = entries => {
-//   const search = searchForm.elements.searchQuery.value.trim();
-//   entries.forEach(entry => {
-//     if (entry.isIntersecting && search !== '') {
-//       console.log('Need to download');
-//       onLoadMoreBtn();
-//     }
-//   });
-// };
+const onEntry = entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && query !== '') {
+      onLoadMoreBtn();
+    }
+  });
+};
 
-// const observer = new IntersectionObserver(onEntry, options);
+const observer = new IntersectionObserver(onEntry, options);
 
-// observer.observe(sentinel);
+observer.observe(sentinel);
