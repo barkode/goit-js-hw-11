@@ -98,7 +98,7 @@ function alertEndOfSearch() {
 // Infinity scroll
 
 const options = {
-  rootMargin: '300px',
+  rootMargin: '400px',
 };
 
 const onEntry = entries => {
