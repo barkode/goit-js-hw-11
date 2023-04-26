@@ -73,7 +73,8 @@ function onLoadMoreBtn() {
 }
 
 function alertImagesFound(data) {
-  Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+  console.log(data);
+  Notiflix.Notify.success(`Hooray! We found ${data.total} images.`);
 }
 
 function alertNoEmptySearch() {
