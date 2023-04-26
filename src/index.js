@@ -60,11 +60,13 @@ function onLoadMoreBtn() {
   getImages(query, page, perPage)
     .then(({ data }) => {
       renderGallery(data.hits);
+      console.log(data.hits);
+      console.log(data.totalHits);
       simpleLightBox = new SimpleLightbox('.gallery a').refresh();
 
       const totalPages = Math.ceil(data.totalHits / perPage);
 
-      if (page > totalPages) {
+      if (page >= totalPages) {
         loadMoreBtn.classList.add('is-hidden');
         alertEndOfSearch();
       }
