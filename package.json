@@ -26,14 +26,14 @@
     "npm": "^9.6.5",
     "simplelightbox": "^2.13.0",
     "throttle-debounce": "^5.0.0",
-    "update": "^0.7.4",
+    "update": "^0.4.2",
     "upgrade": "^1.1.0"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
     "buffer": "^5.7.1",
     "json-server": "^0.17.3",
-    "parcel": "^2.6.0",
+    "parcel": "^2.8.3",
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-include": "^1.7.4"
   },

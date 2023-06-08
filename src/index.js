@@ -14,6 +14,10 @@ let page = 1;
 let simpleLightBox;
 const perPage = 40;
 
+const infinityScrollOptions = {
+  rootMargin: '400px',
+};
+
 searchForm.addEventListener('submit', onSearchForm);
 // loadMoreBtn.addEventListener('click', onLoadMoreBtn);
 
@@ -25,6 +29,7 @@ function onSearchForm(e) {
   window.scrollTo({ top: 0 });
   page = 1;
   query = e.currentTarget.searchQuery.value.trim();
+  // Image Search by world
   gallery.innerHTML = '';
   loadMoreBtn.classList.add('is-hidden');
 
@@ -37,15 +42,16 @@ function onSearchForm(e) {
     .then(({ data }) => {
       if (data.totalHits === 0) {
         alertNoImagesFound();
-      } else {
-        renderGallery(data.hits);
-        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
-        alertImagesFound(data);
+        return;
+      } //else {
+      renderGallery(data.hits);
+      simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+      alertImagesFound(data);
 
-        // if (data.totalHits > perPage) {
-        //   loadMoreBtn.classList.remove('is-hidden');
-        // }
-      }
+      // if (data.totalHits > perPage) {
+      //   loadMoreBtn.classList.remove('is-hidden');
+      // }
+      //}
     })
     .catch(error => console.log(error))
     .finally(() => {
@@ -54,7 +60,7 @@ function onSearchForm(e) {
 }
 
 function onLoadMoreBtn() {
-  page += 1;
+  //page += 1;
   simpleLightBox.destroy();
 
   getImages(query, page, perPage)
@@ -62,12 +68,15 @@ function onLoadMoreBtn() {
       renderGallery(data.hits);
       simpleLightBox = new SimpleLightbox('.gallery a').refresh();
 
-      const totalPages = Math.ceil(data.totalHits / perPage);
+      const totalPages = Math.ceil(data.total / perPage);
 
       if (page >= totalPages) {
         //   loadMoreBtn.classList.add('is-hidden');
         alertEndOfSearch();
-        observer.unobserve(sentinel);
+        //observer.unobserve(sentinel);
+        //return;
+        //} else {
+        //  page += 1;
       }
     })
     .catch(error => console.log(error));
@@ -97,10 +106,6 @@ function alertEndOfSearch() {
 
 // Infinity scroll
 
-const options = {
-  rootMargin: '400px',
-};
-
 const onEntry = entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting && query !== '') {
@@ -109,6 +114,6 @@ const onEntry = entries => {
   });
 };
 
-const observer = new IntersectionObserver(onEntry, options);
+const observer = new IntersectionObserver(onEntry, infinityScrollOptions);
 
 observer.observe(sentinel);
